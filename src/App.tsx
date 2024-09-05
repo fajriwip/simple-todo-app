@@ -5,6 +5,7 @@ import { Column } from './Column.tsx'
 import { AddNewItem } from './AddNewItem.tsx'
 import { useAppState } from './state/AppStateContext.tsx'
 import { addList } from './state/Action.ts'
+import { CustomDragLayer } from './CustomDragLayer.tsx'
 
 function App() {
   const { lists, dispatch } = useAppState()
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <AppContainer>
+      <CustomDragLayer />
       {
         lists.map(({ id, title }) => <Column key={id} title={title} id={id} />)
       }

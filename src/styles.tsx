@@ -12,7 +12,7 @@ type GridProps = {
   $gutters?: number
 }
 
-interface DragPreviewContainerProps {
+type DragPreviewContainerProps = {
   isHidden?: boolean
   isPreview?: boolean
 }

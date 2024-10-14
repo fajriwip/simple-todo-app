@@ -42,8 +42,8 @@ export const Column = ({ title, id, isPreview }: ColumnProps) => {
                 if (draggedItem.columnId !== id) return
                 if (tasks.length) return
                 dispatch(moveTask(draggedItem.id, null, draggedItem.columnId, id))
+                dispatch(setDraggedItem({ ...draggedItem, columnId: id }))
             }
-            dispatch(setDraggedItem({ ...draggedItem, columnId: id }))
         })
     })
 
@@ -55,13 +55,13 @@ export const Column = ({ title, id, isPreview }: ColumnProps) => {
         <ColumnContainer isPreview={isPreview} ref={ref} isHidden={isHidden(draggedItem, 'COLUMN', id, isPreview)}>
             <ColumnTitle>{title}</ColumnTitle>
             {
-                tasks.map(({ text }) =>
+                tasks.map((task) =>
                     <Card
                         isPreview={isPreview}
                         columnId={id}
-                        text={text}
+                        text={task.text}
                         key={id}
-                        id={id}
+                        id={task.id}
                     />
                 )
             }

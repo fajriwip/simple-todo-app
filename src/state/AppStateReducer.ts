@@ -1,6 +1,7 @@
 import { type Action } from "./Action"
 import { findItemIndexById, moveItem } from "../utils/arrayUtils";
 import { DragItem } from "../DragItem";
+import { nanoid } from "nanoid";
 
 export interface Task {
     id: string;
@@ -18,8 +19,6 @@ export interface AppState {
     draggedItem: DragItem | null
 }
 
-const id = Math.random().toString(36).slice(2);
-
 export const appStateReducer = (
     draft: AppState,
     action: Action
@@ -27,7 +26,7 @@ export const appStateReducer = (
     switch (action.type) {
         case "ADD_LIST": {
             draft.lists.push({
-                id: id,
+                id: nanoid(),
                 title: action.payload,
                 tasks: []
             })
@@ -37,7 +36,7 @@ export const appStateReducer = (
             const { text, listId } = action.payload
             const targetListIndex = findItemIndexById(draft.lists, listId)
             draft.lists[targetListIndex].tasks.push({
-                id: id,
+                id: nanoid(),
                 text: text
             })
             break
